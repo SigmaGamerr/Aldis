@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aldi Pack Opener</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <h1 id="logo">Aldi Pack Opener</h1>
+    <div class="coins">Coins: <span id="coinCount">500</span></div>
+  </header>
+
+  <main>
+    <section class="packs">
+      <div class="pack" data-pack="ocean">
+        <h2 class="pack-title">
+          Ocean <span class="pack-last-word" data-pack="ocean">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">35</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="arctic">
+        <h2 class="pack-title">
+          Arctic <span class="pack-last-word" data-pack="arctic">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">35</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="sky">
+        <h2 class="pack-title">
+          Sky <span class="pack-last-word" data-pack="sky">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">30</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="volcano">
+        <h2 class="pack-title">
+          Volcano <span class="pack-last-word" data-pack="volcano">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">40</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="spirit">
+        <h2 class="pack-title">
+          Spirit <span class="pack-last-word" data-pack="spirit">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">40</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="crystal">
+        <h2 class="pack-title">
+          Crystal <span class="pack-last-word" data-pack="crystal">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">45</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="cosmic">
+        <h2 class="pack-title">
+          Cosmic <span class="pack-last-word" data-pack="cosmic">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">50</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="cyber">
+        <h2 class="pack-title">
+          Cyber <span class="pack-last-word" data-pack="cyber">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">45</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="quantum">
+        <h2 class="pack-title">
+          Quantum <span class="pack-last-word" data-pack="quantum">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">55</span> coins</p>
+      </div>
+
+      <div class="pack" data-pack="food">
+        <h2 class="pack-title">
+          Food <span class="pack-last-word" data-pack="food">Pack</span>
+          <span class="info-icon" title="Uncommon ~50%, Rare ~25%, Epic ~15%, Legendary ~0.5%, Mythic ~0.05%">?</span>
+        </h2>
+        <p>Price: <span class="price">25</span> coins</p>
+      </div>
+    </section>
+
+    <section class="reveal-area">
+      <div class="aldi-card" id="aldiCard">
+        <div class="aldi-name" id="aldiName">Click a pack to buy.</div>
+      </div>
+      <div class="status" id="statusText">Welcome, collector.</div>
+    </section>
+
+    <section class="inventory">
+      <h2>Inventory</h2>
+      <ul id="inventoryList"></ul>
+    </section>
+
+    <div id="confettiContainer"></div>
+
+    <div id="mythicOverlay" class="mythic-overlay hidden">
+      <div class="mythic-content">
+        <h2>MYTHIC ALDI!</h2>
+        <p id="mythicName"></p>
+        <button id="closeMythic">Close</button>
+      </div>
+    </div>
+
+    <div id="buyOverlay" class="buy-overlay hidden">
+      <div class="buy-content">
+        <p id="buyText">Buy this pack?</p>
+        <button id="buyYes">Yes</button>
+        <button id="buyNo">No</button>
+      </div>
+    </div>
+
+    <!-- SFX (replace src with your own files) -->
+    <audio id="sfxOpen" src="open.mp3"></audio>
+    <audio id="sfxMythic" src="mythic.mp3"></audio>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
