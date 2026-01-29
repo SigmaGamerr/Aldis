@@ -1,378 +1,461 @@
-const packs = {
-  ocean: {
-    price: 35,
-    uncommons: [
-      "Bubble Crab", "Shell Pup", "Wave Hopper", "Reef Gecko",
-      "Foam Otter", "Kelp Cat", "Tide Gull", "Pebble Turtle"
-    ],
-    rares: ["Deep Blue Ray", "Storm Dolphin", "Coral Serpent", "Abyss Pike"],
-    epics: ["Scarlet Leviathan", "Tidal Roc"],
-    legendaries: ["Tidal Serpent", "Pearl Kraken"],
-    mythics: ["Abyssal Star Whale"]
+// ---------- DATA ----------
+
+const packs = [
+  {
+    id: "forest",
+    name: "Forest Pack",
+    cost: 25,
+    blooks: [
+      { name: "Squirrel Scout", rarity: "uncommon" },
+      { name: "Mossy Rabbit", rarity: "uncommon" },
+      { name: "Pine Owl", rarity: "rare" },
+      { name: "Red Fox", rarity: "rare" },
+      { name: "Bark Bear", rarity: "epic" },
+      { name: "Timber Wolf", rarity: "epic" },
+      { name: "Forest Guardian", rarity: "legendary" },
+      { name: "Ancient Treant", rarity: "legendary" },
+      { name: "Emerald Stag", rarity: "chroma" }
+    ]
   },
-  arctic: {
-    price: 35,
-    uncommons: [
-      "Frost Pup", "Snow Hare", "Ice Finch", "Glacier Seal",
-      "Chill Fox", "Snowy Lynx", "Frost Beetle", "Ice Cub"
-    ],
-    rares: ["Blizzard Wolf", "Aurora Owl", "Glacier Bear"],
-    epics: ["Crimson Yeti", "Frozen Titan"],
-    legendaries: ["Polar Warden"],
-    mythics: ["Eternal Ice Spirit"]
+  {
+    id: "space",
+    name: "Space Pack",
+    cost: 35,
+    blooks: [
+      { name: "Astro Pup", rarity: "uncommon" },
+      { name: "Moon Miner", rarity: "uncommon" },
+      { name: "Star Pilot", rarity: "rare" },
+      { name: "Meteor Bot", rarity: "rare" },
+      { name: "Nebula Mage", rarity: "epic" },
+      { name: "Void Serpent", rarity: "epic" },
+      { name: "Galaxy Knight", rarity: "legendary" },
+      { name: "Cosmic Titan", rarity: "legendary" },
+      { name: "Prism Alien", rarity: "chroma" }
+    ]
   },
-  sky: {
-    price: 30,
-    uncommons: [
-      "Cloud Chick", "Breeze Pup", "Sky Moth", "Gust Finch",
-      "Drift Kite", "Nimbus Cat", "Wind Hopper", "Sky Beetle"
-    ],
-    rares: ["Storm Hawk", "Thunder Roc", "Zephyr Drake"],
-    epics: ["Crimson Sky Serpent"],
-    legendaries: ["Sunrise Phoenix"],
-    mythics: ["Tempest Godwing"]
+  {
+    id: "ocean",
+    name: "Ocean Pack",
+    cost: 25,
+    blooks: [
+      { name: "Bubble Fish", rarity: "uncommon" },
+      { name: "Coral Crab", rarity: "uncommon" },
+      { name: "Tide Turtle", rarity: "rare" },
+      { name: "Deep Diver", rarity: "rare" },
+      { name: "Storm Shark", rarity: "epic" },
+      { name: "Abyss Ray", rarity: "epic" },
+      { name: "Leviathan Cub", rarity: "legendary" },
+      { name: "Kraken Spawn", rarity: "legendary" },
+      { name: "Sapphire Dolphin", rarity: "chroma" }
+    ]
   },
-  volcano: {
-    price: 40,
-    uncommons: [
-      "Ember Pup", "Ash Lizard", "Cinder Beetle", "Magma Cub",
-      "Coal Bat", "Smoke Rat", "Charred Gecko", "Spark Moth"
-    ],
-    rares: ["Lava Hound", "Blaze Drake", "Molten Boar"],
-    epics: ["Inferno Golem", "Crimson Magmus"],
-    legendaries: ["Ember Phoenix", "Volcanic Colossus"],
-    mythics: ["Eruption Worldheart"]
+  {
+    id: "medieval",
+    name: "Medieval Pack",
+    cost: 30,
+    blooks: [
+      { name: "Village Peasant", rarity: "uncommon" },
+      { name: "Young Squire", rarity: "uncommon" },
+      { name: "Archer Scout", rarity: "rare" },
+      { name: "Iron Knight", rarity: "rare" },
+      { name: "Battle Mage", rarity: "epic" },
+      { name: "Dragon Tamer", rarity: "epic" },
+      { name: "Royal Paladin", rarity: "legendary" },
+      { name: "Fire Drake", rarity: "legendary" },
+      { name: "Crystal Griffin", rarity: "chroma" }
+    ]
   },
-  spirit: {
-    price: 40,
-    uncommons: [
-      "Wisp Pup", "Lantern Moth", "Echo Cat", "Shade Hare",
-      "Glow Beetle", "Driftling", "Faint Fox", "Hollow Finch"
-    ],
-    rares: ["Grave Warden", "Soul Owl", "Spectral Wolf"],
-    epics: ["Crimson Reaper", "Ethereal Knight"],
-    legendaries: ["Phantom Monarch"],
-    mythics: ["Eternal Gravekeeper"]
+  {
+    id: "candy",
+    name: "Candy Pack",
+    cost: 20,
+    blooks: [
+      { name: "Gumdrop Kid", rarity: "uncommon" },
+      { name: "Marshmallow Puff", rarity: "uncommon" },
+      { name: "Jelly Knight", rarity: "rare" },
+      { name: "Licorice Cat", rarity: "rare" },
+      { name: "Caramel Giant", rarity: "epic" },
+      { name: "Frosted Witch", rarity: "epic" },
+      { name: "Sugar King", rarity: "legendary" },
+      { name: "Candy Hydra", rarity: "legendary" },
+      { name: "Neon Lollipop", rarity: "chroma" }
+    ]
   },
-  crystal: {
-    price: 45,
-    uncommons: [
-      "Shard Pup", "Gem Beetle", "Quartz Cat", "Prism Gecko",
-      "Opal Hare", "Glint Moth", "Facet Fox", "Shardling", "Dust Sprite"
-    ],
-    rares: ["Amethyst Drake", "Sapphire Serpent", "Ruby Stag"],
-    epics: ["Crystal Colossus", "Prism Titan"],
-    legendaries: ["Crown of Shards"],
-    mythics: ["Heart of the Crystal"]
+  {
+    id: "tech",
+    name: "Tech Pack",
+    cost: 35,
+    blooks: [
+      { name: "Circuit Bug", rarity: "uncommon" },
+      { name: "Byte Bot", rarity: "uncommon" },
+      { name: "Data Drone", rarity: "rare" },
+      { name: "Laser Pup", rarity: "rare" },
+      { name: "Quantum Hacker", rarity: "epic" },
+      { name: "Plasma Golem", rarity: "epic" },
+      { name: "Cyber Warden", rarity: "legendary" },
+      { name: "Omega Android", rarity: "legendary" },
+      { name: "Glitch Sprite", rarity: "chroma" },
+      { name: "Spectrum Core", rarity: "chroma" }
+    ]
   },
-  cosmic: {
-    price: 50,
-    uncommons: [
-      "Starling", "Orbit Pup", "Meteor Bug", "Comet Fox",
-      "Void Moth", "Nebula Mouse", "Astro Gecko", "Dust Pup", "Ringed Hare"
-    ],
-    rares: ["Nebula Drake", "Void Lynx", "Galaxy Serpent", "Comet Roc"],
-    epics: ["Red Nova Titan", "Stellar Colossus"],
-    legendaries: ["Solar Phoenix"],
-    mythics: ["Eclipse Godbeast", "Prismatic Core"]
+  {
+    id: "farm",
+    name: "Farm Pack",
+    cost: 20,
+    blooks: [
+      { name: "Hay Chick", rarity: "uncommon" },
+      { name: "Mud Piglet", rarity: "uncommon" },
+      { name: "Barn Cat", rarity: "rare" },
+      { name: "Tractor Kid", rarity: "rare" },
+      { name: "Harvest Bull", rarity: "epic" },
+      { name: "Scarecrow Spirit", rarity: "epic" },
+      { name: "Golden Rooster", rarity: "legendary" },
+      { name: "Titan Cow", rarity: "legendary" },
+      { name: "Rainbow Sheep", rarity: "chroma" }
+    ]
   },
-  cyber: {
-    price: 45,
-    uncommons: [
-      "Byte Fox", "Pixel Pup", "Glitch Beetle", "Neon Rat",
-      "Wire Gecko", "Code Moth", "Data Hare", "Chip Cat"
-    ],
-    rares: ["Neon Mantis", "Firewall Drake", "Circuit Wolf"],
-    epics: ["Glitch Dragon", "Cyber Titan"],
-    legendaries: ["Quantum Panther"],
-    mythics: ["Overclocked Singularity"]
+  {
+    id: "city",
+    name: "City Pack",
+    cost: 25,
+    blooks: [
+      { name: "Street Kid", rarity: "uncommon" },
+      { name: "Taxi Pup", rarity: "uncommon" },
+      { name: "Firefighter Rookie", rarity: "rare" },
+      { name: "Delivery Drone", rarity: "rare" },
+      { name: "Neon Skater", rarity: "epic" },
+      { name: "Skyline Guardian", rarity: "epic" },
+      { name: "Metro Titan", rarity: "legendary" },
+      { name: "Steel Sentinel", rarity: "legendary" },
+      { name: "Prism Billboard", rarity: "chroma" }
+    ]
   },
-  quantum: {
-    price: 55,
-    uncommons: [
-      "Phase Pup", "Quark Beetle", "Spin Cat", "Wave Hare",
-      "Flux Gecko", "Loop Moth", "Bit Rat", "Echo Pup"
-    ],
-    rares: ["Quantum Serpent", "Phase Wyrm", "Time Lynx"],
-    epics: ["Chrono Colossus", "Paradox Titan"],
-    legendaries: ["Event Horizon Dragon"],
-    mythics: ["Infinite Collapse"]
+  {
+    id: "mythical",
+    name: "Mythical Pack",
+    cost: 40,
+    blooks: [
+      { name: "Tiny Imp", rarity: "uncommon" },
+      { name: "Baby Sprite", rarity: "uncommon" },
+      { name: "Stone Gargoyle", rarity: "rare" },
+      { name: "Frost Fairy", rarity: "rare" },
+      { name: "Thunder Roc", rarity: "epic" },
+      { name: "Lava Djinn", rarity: "epic" },
+      { name: "Celestial Kirin", rarity: "legendary" },
+      { name: "Shadow Behemoth", rarity: "legendary" },
+      { name: "Aurora Phoenix", rarity: "chroma" },
+      { name: "Spectrum Chimera", rarity: "chroma" }
+    ]
   },
-  food: {
-    price: 25,
-    uncommons: [
-      "Burger Pup", "Noodle Cat", "Berry Hare", "Toast Gecko",
-      "Soda Moth", "Candy Beetle", "Pizza Rat", "Apple Fox"
-    ],
-    rares: ["Sundae Serpent", "Donut Drake", "Milkshake Wolf"],
-    epics: ["Crimson Chef Titan"],
-    legendaries: ["Golden Feast Beast"],
-    mythics: ["Eternal Snack God"]
+  {
+    id: "chaos",
+    name: "Chaos Pack",
+    cost: 50,
+    blooks: [
+      { name: "Glitch Blob", rarity: "uncommon" },
+      { name: "Static Worm", rarity: "uncommon" },
+      { name: "Error Slime", rarity: "rare" },
+      { name: "Fracture Beast", rarity: "rare" },
+      { name: "Paradox Mage", rarity: "epic" },
+      { name: "Rift Serpent", rarity: "epic" },
+      { name: "Time Shatterer", rarity: "legendary" },
+      { name: "Void Monarch", rarity: "legendary" },
+      { name: "Chromatic Rift", rarity: "chroma" },
+      { name: "Infinity Echo", rarity: "chroma" },
+      { name: "Fractal Nova", rarity: "chroma" }
+    ]
   }
+];
+
+// rarity chances (you can tweak)
+const rarityChances = {
+  uncommon: 0.6,   // 60%
+  rare: 0.2,       // 20%
+  epic: 0.05,      // 5%
+  legendary: 0.01, // 1%
+  chroma: 0.0005   // 0.05%
 };
 
-let coins = 500;
-let inventory = {};
-let chromaMode = false; // secret mythic mode
-let logoClicks = 0;
-let logoTimer = null;
+// ---------- STATE ----------
 
-const legendaryMode = {};
-const packWordClicks = {};
+let tokens = 1000;
+let inventory = {}; // key: blook name -> { count, rarity }
+let secretChroma = false;
 
-const card = document.getElementById("aldiCard");
-const nameBox = document.getElementById("aldiName");
-const statusText = document.getElementById("statusText");
-const coinCount = document.getElementById("coinCount");
-const inventoryList = document.getElementById("inventoryList");
-const confettiContainer = document.getElementById("confettiContainer");
-const mythicOverlay = document.getElementById("mythicOverlay");
-const mythicNameEl = document.getElementById("mythicName");
-const closeMythicBtn = document.getElementById("closeMythic");
-const sfxOpen = document.getElementById("sfxOpen");
-const sfxMythic = document.getElementById("sfxMythic");
+// secret click tracking
+const secretClickWindowMs = 1500;
+let lastClickTime = 0;
+let clickCount = 0;
 
-const buyOverlay = document.getElementById("buyOverlay");
-const buyText = document.getElementById("buyText");
-const buyYes = document.getElementById("buyYes");
-const buyNo = document.getElementById("buyNo");
+// ---------- DOM ----------
 
-let pendingPackKey = null;
+const tokenCountEl = document.getElementById("token-count");
+const packsContainer = document.getElementById("packs-container");
+const inventoryGrid = document.getElementById("inventory-grid");
 
-coinCount.textContent = coins;
+const tabMarketBtn = document.getElementById("tab-market");
+const tabInventoryBtn = document.getElementById("tab-inventory");
+const marketSection = document.getElementById("market-section");
+const inventorySection = document.getElementById("inventory-section");
 
-// Secret mythic mode: logo 3 clicks on, 4th reset
-document.getElementById("logo").addEventListener("click", () => {
-  logoClicks++;
-  if (!logoTimer) {
-    logoTimer = setTimeout(() => {
-      logoClicks = 0;
-      logoTimer = null;
-    }, 2000);
-  }
-  if (logoClicks === 3) {
-    chromaMode = true;
-    statusText.textContent = "Secret mythic mode ACTIVATED.";
-  } else if (logoClicks === 4) {
-    chromaMode = false;
-    statusText.textContent = "Secret mythic mode RESET.";
-    logoClicks = 0;
-    clearTimeout(logoTimer);
-    logoTimer = null;
-  }
-});
+const overlay = document.getElementById("overlay");
+const overlayPackName = document.getElementById("overlay-pack-name");
+const overlayBlookName = document.getElementById("overlay-blook-name");
+const overlayBlookRarity = document.getElementById("overlay-blook-rarity");
+const overlayContinue = document.getElementById("overlay-continue");
 
-// Secret legendary mode per pack: last word 3 clicks on, 4th reset
-document.querySelectorAll(".pack-last-word").forEach(span => {
-  const packKey = span.dataset.pack;
-  packWordClicks[packKey] = 0;
-  legendaryMode[packKey] = false;
+// ---------- INIT ----------
 
-  span.addEventListener("click", e => {
-    e.stopPropagation();
-    packWordClicks[packKey]++;
-    if (packWordClicks[packKey] === 3) {
-      legendaryMode[packKey] = true;
-      statusText.textContent = `Legendary mode ON for ${packKey} pack.`;
-    } else if (packWordClicks[packKey] === 4) {
-      legendaryMode[packKey] = false;
-      statusText.textContent = `Legendary mode RESET for ${packKey} pack.`;
-      packWordClicks[packKey] = 0;
-    }
+function loadState() {
+  const savedTokens = localStorage.getItem("tokens");
+  const savedInventory = localStorage.getItem("inventory");
+  if (savedTokens !== null) tokens = parseInt(savedTokens, 10);
+  if (savedInventory) inventory = JSON.parse(savedInventory);
+}
+
+function saveState() {
+  localStorage.setItem("tokens", tokens.toString());
+  localStorage.setItem("inventory", JSON.stringify(inventory));
+}
+
+function updateTokensDisplay() {
+  tokenCountEl.textContent = tokens;
+}
+
+function createPackCards() {
+  packsContainer.innerHTML = "";
+  packs.forEach(pack => {
+    const card = document.createElement("div");
+    card.className = "pack-card";
+
+    const logo = document.createElement("div");
+    logo.className = "pack-logo";
+    logo.textContent = pack.name.split(" ")[0];
+
+    // secret chroma click logic (no visual)
+    logo.addEventListener("click", () => {
+      const now = Date.now();
+      if (now - lastClickTime > secretClickWindowMs) {
+        clickCount = 0;
+      }
+      clickCount++;
+      lastClickTime = now;
+      if (clickCount >= 3) {
+        secretChroma = true;
+        clickCount = 0;
+      }
+    });
+
+    const nameEl = document.createElement("div");
+    nameEl.className = "pack-name";
+    nameEl.textContent = pack.name;
+
+    const costEl = document.createElement("div");
+    costEl.className = "pack-cost";
+    costEl.textContent = `Cost: ${pack.cost} tokens`;
+
+    const btn = document.createElement("button");
+    btn.className = "pack-open-btn";
+    btn.textContent = "Open Pack";
+    btn.addEventListener("click", () => openPack(pack));
+
+    card.appendChild(logo);
+    card.appendChild(nameEl);
+    card.appendChild(costEl);
+    card.appendChild(btn);
+    packsContainer.appendChild(card);
   });
-});
-
-// Clicking a pack opens buy confirmation
-document.querySelectorAll(".pack").forEach(packEl => {
-  packEl.addEventListener("click", () => {
-    const packKey = packEl.dataset.pack;
-    const price = packs[packKey].price;
-    pendingPackKey = packKey;
-    buyText.textContent = `Buy ${capitalize(packKey)} Pack for ${price} coins?`;
-    buyOverlay.classList.remove("hidden");
-  });
-});
-
-buyYes.addEventListener("click", () => {
-  if (pendingPackKey) {
-    openPack(pendingPackKey);
-  }
-  pendingPackKey = null;
-  buyOverlay.classList.add("hidden");
-});
-
-buyNo.addEventListener("click", () => {
-  pendingPackKey = null;
-  buyOverlay.classList.add("hidden");
-});
-
-closeMythicBtn.addEventListener("click", () => {
-  mythicOverlay.classList.add("hidden");
-});
-
-function openPack(packKey) {
-  const pack = packs[packKey];
-  if (!pack) return;
-
-  if (coins < pack.price) {
-    statusText.textContent = "Not enough coins!";
-    return;
-  }
-
-  coins -= pack.price;
-  coinCount.textContent = coins;
-
-  playSfx(sfxOpen);
-
-  const result = pullFromPack(packKey, pack);
-  revealAldi(result.name, result.rarity);
-  addToInventory(result.name, result.rarity);
-}
-
-function pullFromPack(packKey, pack) {
-  // Mythic secret mode
-  if (chromaMode && pack.mythics.length) {
-    return { name: randomFrom(pack.mythics), rarity: "mythic" };
-  }
-
-  // Legendary secret mode
-  if (legendaryMode[packKey] && pack.legendaries.length) {
-    return { name: randomFrom(pack.legendaries), rarity: "legendary" };
-  }
-
-  const roll = Math.random();
-  const mythicChance = 0.0005;    // 0.05%
-  const legendaryChance = 0.005;  // 0.5%
-  const epicChance = 0.15;
-  const rareChance = 0.25;
-  // Uncommon is the rest
-
-  if (roll < mythicChance && pack.mythics.length) {
-    return { name: randomFrom(pack.mythics), rarity: "mythic" };
-  } else if (roll < mythicChance + legendaryChance && pack.legendaries.length) {
-    return { name: randomFrom(pack.legendaries), rarity: "legendary" };
-  } else if (roll < mythicChance + legendaryChance + epicChance && pack.epics.length) {
-    return { name: randomFrom(pack.epics), rarity: "epic" };
-  } else if (roll < mythicChance + legendaryChance + epicChance + rareChance && pack.rares.length) {
-    return { name: randomFrom(pack.rares), rarity: "rare" };
-  } else {
-    return { name: randomFrom(pack.uncommons), rarity: "uncommon" };
-  }
-}
-
-function revealAldi(name, rarity) {
-  card.className = "aldi-card";
-  nameBox.className = "aldi-name";
-  nameBox.textContent = name;
-  card.classList.add(rarity);
-
-  if (rarity === "rare") spawnSideConfetti("#0033cc");
-  if (rarity === "epic") spawnCornerConfetti("#ff0033");
-  if (rarity === "legendary") {
-    spawnTopConfetti("#ff9900");
-    nameBox.classList.add("fall-in");
-  }
-  if (rarity === "mythic") {
-    spawnBurstConfetti("#00eaff");
-    nameBox.classList.add("spin-in");
-    showMythicScreen(name);
-    playSfx(sfxMythic);
-  }
-
-  statusText.textContent = `You pulled a ${rarity.toUpperCase()} Aldi: ${name}`;
-}
-
-function addToInventory(name, rarity) {
-  if (!inventory[name]) {
-    inventory[name] = { count: 0, rarity };
-  }
-  inventory[name].count++;
-  renderInventory();
 }
 
 function renderInventory() {
-  inventoryList.innerHTML = "";
-  Object.entries(inventory).forEach(([name, data]) => {
-    const li = document.createElement("li");
-    li.textContent = `${name} (${data.rarity}) x${data.count}`;
-    inventoryList.appendChild(li);
+  inventoryGrid.innerHTML = "";
+  const entries = Object.entries(inventory);
+  if (entries.length === 0) {
+    inventoryGrid.textContent = "No BLooks yet. Open some packs!";
+    return;
+  }
+
+  entries.forEach(([name, data]) => {
+    const item = document.createElement("div");
+    item.className = "inventory-item";
+
+    const nameEl = document.createElement("div");
+    nameEl.className = "inventory-name";
+    nameEl.textContent = name;
+
+    const rarityEl = document.createElement("div");
+    rarityEl.className = "inventory-rarity rarity-" + data.rarity;
+    rarityEl.textContent = data.rarity.toUpperCase();
+
+    const countEl = document.createElement("div");
+    countEl.className = "inventory-count";
+    countEl.textContent = `Owned: ${data.count}`;
+
+    item.appendChild(nameEl);
+    item.appendChild(rarityEl);
+    item.appendChild(countEl);
+    inventoryGrid.appendChild(item);
   });
 }
 
-function showMythicScreen(name) {
-  mythicNameEl.textContent = name;
-  mythicOverlay.classList.remove("hidden");
-}
+// ---------- RARITY + PACK OPENING ----------
 
-function randomFrom(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-/* Confetti helpers */
-
-function spawnSideConfetti(color) {
-  for (let i = 0; i < 40; i++) {
-    const c = document.createElement("div");
-    c.classList.add("confetti");
-    c.style.background = color;
-    c.style.left = Math.random() < 0.5 ? "0px" : window.innerWidth + "px";
-    c.style.top = Math.random() * window.innerHeight + "px";
-    confettiContainer.appendChild(c);
-    removeLater(c);
+function rollRarity() {
+  if (secretChroma) {
+    secretChroma = false;
+    return "chroma";
   }
+
+  const r = Math.random();
+  let sum = 0;
+
+  sum += rarityChances.chroma;
+  if (r < sum) return "chroma";
+
+  sum += rarityChances.legendary;
+  if (r < sum) return "legendary";
+
+  sum += rarityChances.epic;
+  if (r < sum) return "epic";
+
+  sum += rarityChances.rare;
+  if (r < sum) return "rare";
+
+  return "uncommon";
 }
 
-function spawnCornerConfetti(color) {
-  for (let i = 0; i < 40; i++) {
-    const c = document.createElement("div");
-    c.classList.add("confetti");
-    c.style.background = color;
-    c.style.left = Math.random() < 0.5 ? "0px" : window.innerWidth + "px";
-    c.style.top = Math.random() < 0.5 ? "0px" : window.innerHeight + "px";
-    confettiContainer.appendChild(c);
-    removeLater(c);
+function openPack(pack) {
+  if (tokens < pack.cost) return;
+  tokens -= pack.cost;
+  updateTokensDisplay();
+  saveState();
+
+  const rarity = rollRarity();
+  const candidates = pack.blooks.filter(b => b.rarity === rarity);
+
+  // if no blook of that rarity in this pack, fallback to uncommon
+  const chosenList = candidates.length > 0
+    ? candidates
+    : pack.blooks.filter(b => b.rarity === "uncommon");
+
+  const blook = chosenList[Math.floor(Math.random() * chosenList.length)];
+
+  addToInventory(blook);
+  saveState();
+  showOverlay(pack, blook);
+}
+
+// ---------- INVENTORY ----------
+
+function addToInventory(blook) {
+  if (!inventory[blook.name]) {
+    inventory[blook.name] = { count: 0, rarity: blook.rarity };
   }
+  inventory[blook.name].count++;
+  renderInventory();
 }
 
-function spawnTopConfetti(color) {
-  for (let i = 0; i < 50; i++) {
-    const c = document.createElement("div");
-    c.classList.add("confetti");
-    c.style.background = color;
-    c.style.left = Math.random() * window.innerWidth + "px";
-    c.style.top = "-20px";
-    confettiContainer.appendChild(c);
-    removeLater(c);
+// ---------- OVERLAY + CONFETTI ----------
+
+let confettiInterval = null;
+
+function showOverlay(pack, blook) {
+  overlayPackName.textContent = pack.name;
+  overlayBlookName.textContent = blook.name;
+  overlayBlookRarity.className = "";
+  overlayBlookRarity.classList.add("rarity-" + blook.rarity);
+  overlayBlookRarity.textContent = blook.rarity.toUpperCase();
+
+  overlay.classList.remove("hidden");
+
+  startConfettiForRarity(blook.rarity);
+}
+
+function hideOverlay() {
+  overlay.classList.add("hidden");
+  stopConfetti();
+}
+
+function startConfettiForRarity(rarity) {
+  stopConfetti();
+  const container = document.getElementById("overlay-content");
+
+  const colorsByRarity = {
+    epic: ["#ef4444", "#f97316", "#facc15"],
+    legendary: ["#f97316", "#facc15", "#fb923c"],
+    chroma: ["#f97316", "#eab308", "#22c55e", "#3b82f6", "#a855f7", "#ec4899"]
+  };
+
+  if (rarity === "uncommon" || rarity === "rare") return;
+
+  confettiInterval = setInterval(() => {
+    const piece = document.createElement("div");
+    piece.className = "confetti-piece";
+
+    const rect = container.getBoundingClientRect();
+    const x = Math.random() * rect.width;
+    const y = Math.random() * rect.height;
+
+    piece.style.left = x + "px";
+    piece.style.top = y + "px";
+
+    const colors = colorsByRarity[rarity] || ["#ffffff"];
+    piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+    if (rarity === "epic") {
+      piece.style.animation = "shoot-side 0.8s linear forwards";
+    } else if (rarity === "legendary") {
+      piece.style.animation = "fall 1.2s linear forwards";
+    } else if (rarity === "chroma") {
+      const dx = (Math.random() - 0.5) * 300;
+      const dy = (Math.random() - 0.5) * 300;
+      piece.style.setProperty("--dx", dx + "px");
+      piece.style.setProperty("--dy", dy + "px");
+      piece.style.animation = "burst 1s ease-out forwards";
+    }
+
+    container.appendChild(piece);
+
+    setTimeout(() => {
+      piece.remove();
+    }, 1500);
+  }, 80);
+}
+
+function stopConfetti() {
+  if (confettiInterval) {
+    clearInterval(confettiInterval);
+    confettiInterval = null;
   }
+  const container = document.getElementById("overlay-content");
+  const pieces = container.querySelectorAll(".confetti-piece");
+  pieces.forEach(p => p.remove());
 }
 
-function spawnBurstConfetti(color) {
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-  for (let i = 0; i < 60; i++) {
-    const c = document.createElement("div");
-    c.classList.add("confetti");
-    c.style.background = color;
-    c.style.left = centerX + "px";
-    c.style.top = centerY + "px";
-    const dx = (Math.random() - 0.5) * 400;
-    const dy = (Math.random() - 0.5) * 400;
-    c.style.transform = `translate(${dx}px, ${dy}px)`;
-    confettiContainer.appendChild(c);
-    removeLater(c);
-  }
-}
+// ---------- TABS ----------
 
-function removeLater(el) {
-  setTimeout(() => el.remove(), 2000);
-}
+tabMarketBtn.addEventListener("click", () => {
+  tabMarketBtn.classList.add("active");
+  tabInventoryBtn.classList.remove("active");
+  marketSection.classList.add("active");
+  inventorySection.classList.remove("active");
+});
 
-function playSfx(audioEl) {
-  if (!audioEl) return;
-  audioEl.currentTime = 0;
-  audioEl.play().catch(() => {});
-}
+tabInventoryBtn.addEventListener("click", () => {
+  tabInventoryBtn.classList.add("active");
+  tabMarketBtn.classList.remove("active");
+  inventorySection.classList.add("active");
+  marketSection.classList.remove("active");
+});
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+// ---------- EVENTS ----------
+
+overlayContinue.addEventListener("click", hideOverlay);
+
+// ---------- STARTUP ----------
+
+loadState();
+updateTokensDisplay();
+createPackCards();
+renderInventory();
+
